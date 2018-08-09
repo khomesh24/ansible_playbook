@@ -1,0 +1,22 @@
+---
+- hosts: dev
+  tasks:
+    - name: Create a 1GiB patition 
+      parted:
+        device: /dev/sdb
+        number: 1
+        part_end: 1GiB
+        state: present
+    - name: start partition after 1GiB End at 2GiB ( total size 1GiB)
+      parted:
+        device: /dev/sdb
+        number: 2
+        part_start: 1GiB
+        part_end: 2GiB
+        state: present
+    - name: start partition after 3GiB
+      parted:
+        device: /dev/sdb
+        number: 3
+        part_start: 3GiB
+        state: present
